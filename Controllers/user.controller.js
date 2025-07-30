@@ -1,3 +1,5 @@
+const userModel= require('../Models/user.model')
+
 const render_signup = (req, res) => {
   res.render("signup");
 };
@@ -5,13 +7,13 @@ const render_login =  (req, res) => {
   res.render("login");
 }
 
-const signup_auth = (req, res) => {
+const signup_auth = async(req, res) => {
   console.log(req.body);
   try {
     const newUsers = new userModel(req.body);
-    newUsers.save();
-    // res.status(201).send("User saved!")
-    res.redirect("login");
+   await newUsers.save()
+    res.status(201).send("User saved!")
+    res.redirect("/user/login");
   } catch (err) {
     res.status(500).send("error signing up");
   }

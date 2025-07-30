@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -11,9 +13,9 @@ const path = require("path");
 const user_router= require('./Router/user.route')
 app.use("/user",user_router);
 
+app.use(express.urlencoded({ extended: true })); // for form data
 
 app.set("view engine", "ejs");
-app.use(express.json());
 // Public route
 app.get("/", (req, res) => {
   res.send("Hello from Express with Mongo, JWT, CORS, etc!");
