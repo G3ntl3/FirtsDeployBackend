@@ -12,8 +12,8 @@ const signup_auth = async(req, res) => {
   try {
     const newUsers = new userModel(req.body);
    await newUsers.save()
+   res.redirect("/user/login");
     res.status(201).send("User saved!")
-    res.redirect("/user/login");
   } catch (err) {
     res.status(500).send("error signing up");
   }
